@@ -1,0 +1,35 @@
+DROP DATABASE IF EXISTS nexos_db;
+CREATE DATABASE nexos_db;
+USE nexos_db;
+
+CREATE TABLE DEPARTAMENTOS(
+	id_departamento INT auto_increment, 
+    primary key (id_departamento),
+    codigo_departamento INT,
+    nombre_departamento VARCHAR(30),
+    fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE TIPO_DOCUMENTO(
+	tipo_documento VARCHAR(2),
+    primary key(tipo_documento)
+);
+CREATE TABLE EMPLEADOS (
+	id_empleado INT AUTO_INCREMENT,
+    primary key (id_empleado),
+    tipo_documento_fk VARCHAR(10),
+    numero_documento INT, 
+    nombres_empleado VARCHAR(30),
+    apellidos_empleado VARCHAR(50),
+    id_departamento_fk INT,
+    ciudad VARCHAR(20),
+    direccion VARCHAR(20),
+    email VARCHAR(50),
+    telefono INT,
+	fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP,
+    foreign key(id_departamento_fk) references departamentos (id_departamento),
+    foreign key(tipo_documento_fk) references tipo_documento (tipo_documento)
+);
