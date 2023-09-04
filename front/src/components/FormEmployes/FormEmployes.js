@@ -10,26 +10,46 @@ const FormEmployes = () =>{
   const [names, setNames] = useState("");
   const [lastnames, setLastames] = useState("");
   const [departamentos, setDepartamentos] = useState([]);
+  const [ciudades, setCiudades] = useState([]);
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    // Realiza una solicitud GET a la API de departamentos
     axios.get('https://api-colombia.com/api/v1/Department')
       .then((response) => {
-        const data = response.data; // Los datos de los departamentos
-        setDepartamentos(data); // Guarda los departamentos en el estado
+        const data = response.data;
+        const departamentosConId = data.map((dep) => ({ id: dep.id, name: dep.name }));
+        setDepartamentos(departamentosConId);
       })
       .catch((error) => {
         console.error("Error al cargar departamentos:", error);
       });
   }, []);
   
+  const fetchCiudades = (departmentId) => {
+    axios
+      .get(`https://api-colombia.com/api/v1/Department/${departmentId}/cities`)
+      .then((response) => {
+        const data = response.data;
+        setCiudades(data);
+      })
+      .catch((error) => {
+        console.error("Error al cargar ciudades:", error);
+      });
+  };
+
   const handleTipoDocChange = (tipoDoc) => {
-    // Aquí puedes realizar alguna acción en respuesta a la selección del tipo de documento.
     console.log("Tipo de Documento seleccionado:", tipoDoc);
   };
 
   const handleDepartamentoChange = (departamento) => {
     console.log("Departamento seleccionado:", departamento);
+    fetchCiudades(departamento);
+  };
+
+  const handleCiudadChange = (ciudad) => {
+    console.log("Ciudad seleccionada:", ciudad);
   };
 
   return (
@@ -63,9 +83,38 @@ const FormEmployes = () =>{
       />
       <Dropdown 
         label="Departamento" 
-        options={departamentos.map((dep) => dep.name)} 
+        options={departamentos} 
         onSelect={handleDepartamentoChange} 
       />
+      <Dropdown 
+        label="Ciudad" 
+        options={ciudades} 
+        onSelect={handleCiudadChange} 
+      />
+      <Input 
+        titulo="Dirección" 
+        placeholder="Ingrese dirección" 
+        required 
+        valor={address} 
+        actualizarValor={setAddress}
+      />
+      <Input 
+        titulo="Correo Electrónico" 
+        placeholder="Ingrese correo" 
+        required 
+        valor={email} 
+        actualizarValor={setEmail}
+        type="email"
+      />
+      <Input 
+        titulo="Teléfono de Contacto" 
+        placeholder="Ingrese telefono" 
+        required 
+        valor={phone} 
+        actualizarValor={setPhone}
+        type="number"
+      />
+      
     </div>
   );
 }
