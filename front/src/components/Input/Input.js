@@ -17,6 +17,7 @@ const Input = (props) =>{
             value={props.valor}
             onChange={manejarCambio}
             type={type}
+            disabled={props.disabled}
         />
     </div>
 }

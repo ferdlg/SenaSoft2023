@@ -14,7 +14,9 @@ const FormEmployes = () =>{
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-
+  const [creationDate, setCreationDate] = useState(new Date().toISOString().split('T')[0]);
+  // const [updateDate, setUpdateDate] = useState("");
+  
   useEffect(() => {
     axios.get('https://api-colombia.com/api/v1/Department')
       .then((response) => {
@@ -114,7 +116,21 @@ const FormEmployes = () =>{
         actualizarValor={setPhone}
         type="number"
       />
-      
+      <Input 
+        titulo="Fecha de Creación" 
+        required 
+        valor={creationDate} 
+        actualizarValor={setCreationDate}
+        type="date"
+        disabled
+      />
+      {/* <Input 
+        titulo="Fecha de Actualización" 
+        required 
+        valor={updateDate} 
+        actualizarValor={setUpdateDate}
+        type="date"
+      /> */}
     </div>
   );
 }
