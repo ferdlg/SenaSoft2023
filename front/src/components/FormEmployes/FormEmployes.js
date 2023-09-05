@@ -1,39 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import EmployeeService from '../../services/EmployeeService'; // Importa el servicio
 import Dropdown from '../Dropdown/Dropdown';
 import Input from '../Input/Input';
-import "./index.css"
+import "./index.css";
 
-const FormEmployes = () =>{
-  const tipoDocOptions = ["CC", "TI", "RC", "CE"];
+const FormEmployes = () => {
+  // Opciones para el dropdown de tipo de documento
+  const tipoDocOptions = [
+    { id: "CC", name: "Cédula de Ciudadania" },
+    { id: "TI", name: "Tarjeta de Identidad" },
+    { id: "RC", name: "Registro Civil" },
+    { id: "CE", name: "Cédula de Extranjería" }
+  ];
+  
+  // Estados para los campos del formulario
   const [docNumber, setDocNumber] = useState("");
   const [names, setNames] = useState("");
-  const [lastnames, setLastames] = useState("");
+  const [lastnames, setLastnames] = useState("");
   const [departamentos, setDepartamentos] = useState([]);
   const [ciudades, setCiudades] = useState([]);
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [creationDate, setCreationDate] = useState(new Date().toISOString().split('T')[0]);
-  // const [updateDate, setUpdateDate] = useState("");
-  
+
+  // Función para cargar los departamentos al cargar el componente
   useEffect(() => {
-    axios.get('https://api-colombia.com/api/v1/Department')
-      .then((response) => {
-        const data = response.data;
-        const departamentosConId = data.map((dep) => ({ id: dep.id, name: dep.name }));
+    EmployeeService.getDepartments()
+      .then((departamentosConId) => {
         setDepartamentos(departamentosConId);
       })
       .catch((error) => {
         console.error("Error al cargar departamentos:", error);
       });
   }, []);
-  
-  const fetchCiudades = (departmentId) => {
-    axios
-      .get(`https://api-colombia.com/api/v1/Department/${departmentId}/cities`)
-      .then((response) => {
-        const data = response.data;
+
+  // Función para manejar el cambio de departamento y cargar las ciudades
+  const handleDepartamentoChange = (departamento) => {
+    console.log("Departamento seleccionado:", departamento);
+    EmployeeService.getCitiesByDepartmentId(departamento)
+      .then((data) => {
         setCiudades(data);
       })
       .catch((error) => {
@@ -41,15 +47,12 @@ const FormEmployes = () =>{
       });
   };
 
+  // Función para manejar el cambio de tipo de documento (por completar)
   const handleTipoDocChange = (tipoDoc) => {
     console.log("Tipo de Documento seleccionado:", tipoDoc);
   };
 
-  const handleDepartamentoChange = (departamento) => {
-    console.log("Departamento seleccionado:", departamento);
-    fetchCiudades(departamento);
-  };
-
+  // Función para manejar el cambio de ciudad (por completar)
   const handleCiudadChange = (ciudad) => {
     console.log("Ciudad seleccionada:", ciudad);
   };
@@ -81,7 +84,7 @@ const FormEmployes = () =>{
         placeholder="Ingrese apellidos" 
         required 
         valor={lastnames} 
-        actualizarValor={setLastames}
+        actualizarValor={setLastnames}
       />
       <Dropdown 
         label="Departamento" 

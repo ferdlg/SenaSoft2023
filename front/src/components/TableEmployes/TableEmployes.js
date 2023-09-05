@@ -2,118 +2,132 @@ import React, { useState } from 'react';
 import "./index.css"
 
 const TableEmployes = ({ employes }) => {
+
+  // Estado local para los filtros de busqueda
   const [searchFilters, setSearchFilters] = useState({
-    nombres: "",
-    apellidos: "",
-    tipoDocumento: "",
-    numeroDocumento: "",
-    departamento: ""
+    Nombres: "",
+    Apellidos: "",
+    TipoDoc: "",
+    NumDoc: "",
+    Departamento: ""
   });
 
+  // Manejar los cambios en los campos de busqueda
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
+    // actualiza el estado searchFilters con el nuevo valor, manteniendo los valores anteriores intactos.
     setSearchFilters({
       ...searchFilters,
       [name]: value
     });
   };
 
+
+
+
+
+
   // Filtra los empleados basados en los criterios de búsqueda
 const filteredEmployes = employes.filter((employe) => {
-  const nombres = employe.Nombres ? employe.Nombres.toLowerCase() : "";
-  const apellidos = employe.Apellidos ? employe.Apellidos.toLowerCase() : "";
-  const tipoDocumento = employe["Tipo de Documento"] ? employe["Tipo de Documento"].toLowerCase() : "";
-  const numeroDocumento = employe["Número Documento"] ? employe["Número Documento"].toLowerCase() : "";
-  const departamento = employe.Departamento ? employe.Departamento.toLowerCase() : "";
+  // Se convierte a minúscula la información de cada empleado para que se pueda realizar la busqueda sin sensibilidad a Mayúsculas/Minúsculas
+  // Si no existe se deja vacio
+  const Nombres = employe.Nombres ? employe.Nombres.toLowerCase() : "";
+  const Apellidos = employe.Apellidos ? employe.Apellidos.toLowerCase() : "";
+  const TipoDoc = employe.TipoDoc ? employe.TipoDoc.toLowerCase() : "";
+  const NumDoc = employe.NumDoc ? employe.NumDoc.toLowerCase() : "";
+  const Departamento = employe.Departamento ? employe.Departamento.toLowerCase() : "";
 
-  const filterNombres = searchFilters.nombres.toLowerCase();
-  const filterApellidos = searchFilters.apellidos.toLowerCase();
-  const filterTipoDocumento = searchFilters.tipoDocumento.toLowerCase();
-  const filterNumeroDocumento = searchFilters.numeroDocumento.toLowerCase();
-  const filterDepartamento = searchFilters.departamento.toLowerCase();
+  // Se hace lo mismo con el texto ingresado en los filtros
+  const filterNombres = searchFilters.Nombres.toLowerCase();
+  const filterApellidos = searchFilters.Apellidos.toLowerCase();
+  const filterTipoDoc = searchFilters.TipoDoc.toLowerCase();
+  const filterNumDoc = searchFilters.NumDoc.toLowerCase();
+  const filterDepartamento = searchFilters.Departamento.toLowerCase();
 
   return (
-    nombres.includes(filterNombres) &&
-    apellidos.includes(filterApellidos) &&
-    tipoDocumento.includes(filterTipoDocumento) &&
-    numeroDocumento.includes(filterNumeroDocumento) &&
-    departamento.includes(filterDepartamento)
+    // Se retorna siempre y cuando se cumplan todas las busquedas
+    Nombres.includes(filterNombres) &&
+    Apellidos.includes(filterApellidos) &&
+    TipoDoc.includes(filterTipoDoc) &&
+    NumDoc.includes(filterNumDoc) &&
+    Departamento.includes(filterDepartamento)
   );
 });
 
-  return (
-    <table className="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">
-            <input
-              type="text"
-              name="nombres"
-              value={searchFilters.nombres}
-              onChange={handleFilterChange}
-              placeholder="Filtrar por Nombres"
-            />
-          </th>
-          <th scope="col">
-            <input
-              type="text"
-              name="apellidos"
-              value={searchFilters.apellidos}
-              onChange={handleFilterChange}
-              placeholder="Filtrar por Apellidos"
-            />
-          </th>
-          <th scope="col">
-            <input
-              type="text"
-              name="tipoDocumento"
-              value={searchFilters.tipoDocumento}
-              onChange={handleFilterChange}
-              placeholder="Filtrar por Tipo de Documento"
-            />
-          </th>
-          <th scope="col">
-            <input
-              type="text"
-              name="numeroDocumento"
-              value={searchFilters.numeroDocumento}
-              onChange={handleFilterChange}
-              placeholder="Filtrar por Número de Documento"
-            />
-          </th>
-          <th scope="col">
-            <input
-              type="text"
-              name="departamento"
-              value={searchFilters.departamento}
-              onChange={handleFilterChange}
-              placeholder="Filtrar por Departamento"
-            />
-          </th>
+return (
+  <table className="TableEmployes table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">
+          <input
+            type="text"
+            name="Nombres"
+            value={searchFilters.Nombres}
+            onChange={handleFilterChange}
+            placeholder="Filtrar por Nombres"
+          />
+        </th>
+        <th scope="col">
+          <input
+            type="text"
+            name="Apellidos"
+            value={searchFilters.Apellidos}
+            onChange={handleFilterChange}
+            placeholder="Filtrar por Apellidos"
+          />
+        </th>
+        <th scope="col">
+          <input
+            type="text"
+            name="TipoDoc"
+            value={searchFilters.TipoDoc}
+            onChange={handleFilterChange}
+            placeholder="Filtrar por Tipo de Documento"
+          />
+        </th>
+        <th scope="col">
+          <input
+            type="text"
+            name="NumDoc"
+            value={searchFilters.NumDoc}
+            onChange={handleFilterChange}
+            placeholder="Filtrar por Número de Documento"
+          />
+        </th>
+        <th scope="col">
+          <input
+            type="text"
+            name="Departamento"
+            value={searchFilters.Departamento}
+            onChange={handleFilterChange}
+            placeholder="Filtrar por Departamento"
+          />
+        </th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Tipo Documento</th>
+        <th scope="col"># Documento</th>
+        <th scope="col">Departamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      {filteredEmployes.map((employe, index) => (
+        <tr key={index}>
+          <td>{employe.Nombres}</td>
+          <td>{employe.Apellidos}</td>
+          <td>{employe.TipoDoc}</td>
+          <td>{employe.NumDoc}</td>
+          <td>{employe.Departamento}</td>
         </tr>
-      </thead>
-      <thead>
-        <tr>
-          <th scope="col">Nombres</th>
-          <th scope="col">Apellidos</th>
-          <th scope="col">Tipo Documento</th>
-          <th scope="col"># Documento</th>
-          <th scope="col">Departamento</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredEmployes.map((employe, index) => (
-          <tr key={index}>
-            <td>{employe.Nombres}</td>
-            <td>{employe.Apellidos}</td>
-            <td>{employe["Tipo de Documento"]}</td>
-            <td>{employe["Número Documento"]}</td>
-            <td>{employe.Departamento}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+      ))}
+    </tbody>
+  </table>
+);
+
 }
 
 export default TableEmployes;
