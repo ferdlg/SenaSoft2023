@@ -12,7 +12,7 @@ const Employes = () =>{
         <Modal title="Nuevo Empleado" optionName="Agregar Empleado">
           <FormEmployes/>
         </Modal>
-
+        
     </div>
 }   
 
