@@ -3,7 +3,7 @@ CREATE DATABASE nexos_db;
 USE nexos_db;
 
 CREATE TABLE DEPARTAMENTOS(
-	id_departamento INT auto_increment, 
+	id_departamento INT auto_increment NOT NULL, 
     primary key (id_departamento),
     codigo_departamento INT,
     nombre_departamento VARCHAR(30),
@@ -13,17 +13,17 @@ CREATE TABLE DEPARTAMENTOS(
 
 
 CREATE TABLE TIPO_DOCUMENTO(
-	tipo_documento VARCHAR(2),
+	tipo_documento VARCHAR(2) NOT NULL,
     primary key(tipo_documento)
 );
 CREATE TABLE EMPLEADOS (
-	id_empleado INT AUTO_INCREMENT,
+	id_empleado INT AUTO_INCREMENT NOT NULL,
     primary key (id_empleado),
-    tipo_documento_fk VARCHAR(10),
+    tipo_documento_fk VARCHAR(10) NOT NULL,
     numero_documento INT, 
     nombres_empleado VARCHAR(30),
     apellidos_empleado VARCHAR(50),
-    id_departamento_fk INT,
+    id_departamento_fk INT NOT NULL,
     ciudad VARCHAR(20),
     direccion VARCHAR(20),
     email VARCHAR(50),
