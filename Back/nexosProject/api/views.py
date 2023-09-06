@@ -19,6 +19,7 @@ def obtener_departamentos(request):
     response = requests.get(url)
 
     if response.status_code ==200:
+        
         data = response.json()
         #procesar los datos de departamentos
         departamentos =[]
