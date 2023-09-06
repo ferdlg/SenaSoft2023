@@ -2,9 +2,11 @@ from typing import Any
 from django import http
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Empleados
 from .models import Departamentos
+from .models import Ciudades
 from django.views import View
 from django.http.response import JsonResponse 
 import requests #libreria requerida para api externa
@@ -28,9 +30,18 @@ def obtener_departamentos(request):
         return JsonResponse({'departamentos': departamentos})
     else:
         return JsonResponse({'error':'No se pudieron obtener datos de la API externa'}, status=500)
+    
+def paginar_registros (request):
+    cantidad_empleados = Empleados.objects.count()
+    registros_pagina = 10 
+    todos_empleados = Empleados.objects.all()
 
+    paginator = Paginator(todos_empleados, registros_pagina)
+
+    num_pagina = 1
+    pagina = paginator.get_page(num_pagina)
+    return
 def obtener_ciudades_departamento(request, id):
-
     url=''
     response = requests.get(url)
 
