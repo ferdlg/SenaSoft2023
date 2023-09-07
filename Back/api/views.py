@@ -18,9 +18,7 @@ def obtener_departamentos(request):
 
     url = 'https://api-colombia.com/api/v1/Department'
     response = requests.get(url)
-
     if response.status_code ==200:
-        
         data = response.json()
         #procesar los datos de departamentos
         departamentos =[]
@@ -29,15 +27,28 @@ def obtener_departamentos(request):
             id_departamento = departamento_data.get('id', None) #obtener id del departamento 
             if nombre_departamento and id_departamento:
                 Departamentos.objects.get_or_create(id=id_departamento,nombre_departamento=nombre_departamento) #Si hay una instancia de departamento que no existe, la crea
-                departamentos.append({'id': id_departamento, 'nombre': nombre_departamento})
+                departamentos.append({'id': id_departamento, 'Departamento': nombre_departamento})
         return JsonResponse({'departamentos': departamentos})
     else:
         return JsonResponse({'error':'No se pudieron obtener datos de la API externa'}, status=500)
     
-def obtener_ciudades_departamento(request, id):
-    url=''
+def obtener_ciudades_departamento(request):
+    url='https://api-colombia.com/api/v1/City'
     response = requests.get(url)
-    
+    if response.status_code ==200:
+        data = response.json()
+        ciudades=[]
+        for ciudad_data in data:
+            id_ciudad = ciudad_data.get('id',None)
+            id_departamento_fk = ciudad_data.get('departmentId',None)
+            nombre_ciudad= ciudad_data.get('name','')
+            if id_ciudad and id_departamento_fk and nombre_ciudad:
+                Ciudades.objects.get_or_create(id=id_ciudad, id_departamento_fk=id_departamento_fk,nombre_ciudad=nombre_ciudad)
+                ciudades.append({'id': id_ciudad, 'idDepartamento':id_departamento_fk, 'Ciudad':nombre_ciudad})
+        return JsonResponse({'Ciudades': ciudades})
+    else:
+        return JsonResponse({'error':'No se pudieron obtener datos de la API externa'}, status=500)
+        
 
 class EmpleadosView(View):
 
