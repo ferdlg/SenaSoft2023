@@ -107,14 +107,25 @@ class EmpleadosView(View):
     def put (self, request, id):
         json_data = json.loads(request.body)
         empleados = list(Empleados.objects.filter(id=id).values())
+        
         if len (empleados)>0:
             empleado = Empleados.objects.get(id = id)
-            empleado.tipo_documento_fk = json_data['tipo_documento_fk']
+            # Actualiza las relaciones con tablas relacionadas, datos foraneos
+            id_tipo_documento = json_data['id_tipo_documento_fk']
+            tipo_documento = TipoDocumento.objects.get(id_tipo_documento=id_tipo_documento)
+            id_departamento = json_data['id_departamento_fk']
+            departamento = Departamentos.objects.get(id_departamento=id_departamento)
+            id_ciudad = json_data['id_ciudad_fk']
+            ciudad = Ciudades.objects.get(id_ciudad=id_ciudad)
+
+            empleado.tipo_documento_fk = tipo_documento
+            empleado.id_departamento_fk = departamento
+            empleado.id_ciudad_fk = ciudad  
+          
+            # Actualizar datos no foraneos 
             empleado.numero_documento = json_data['numero_documento']
             empleado.nombres_empleado = json_data['nombres_empleado']
             empleado.apellidos_empleado = json_data['apellidos_empleado']
-            empleado.id_departamento_fk = json_data['id_departamento_fk']
-            empleado.id_ciudad_fk = json_data['id_ciudad_fk']
             empleado.direccion = json_data['direccion']
             empleado.email = json_data['email']
             empleado.telefono = json_data['telefono']
