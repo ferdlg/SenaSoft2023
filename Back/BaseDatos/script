@@ -3,17 +3,23 @@ CREATE DATABASE nexos_db;
 USE nexos_db;
 
 CREATE TABLE DEPARTAMENTOS(
-	id_departamento INT auto_increment NOT NULL, 
+	id_departamento INT  NOT NULL, 
     primary key (id_departamento),
     codigo_departamento INT,
     nombre_departamento VARCHAR(30),
-    fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP
+    fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-
+CREATE TABLE CIUDADES(
+	id_ciudad INT NOT NULL, 
+    primary key (id_ciudad),
+    id_departamento_fk INT NOT NULL,
+    nombre_ciudad VARCHAR(30),
+    foreign key(id_departamento_fk) references departamentos (id_departamento)
+);
 CREATE TABLE TIPO_DOCUMENTO(
-	tipo_documento VARCHAR(2) NOT NULL,
+	tipo_documento VARCHAR(10) NOT NULL,
     primary key(tipo_documento)
 );
 CREATE TABLE EMPLEADOS (
@@ -24,12 +30,13 @@ CREATE TABLE EMPLEADOS (
     nombres_empleado VARCHAR(30),
     apellidos_empleado VARCHAR(50),
     id_departamento_fk INT NOT NULL,
-    ciudad VARCHAR(20),
-    direccion VARCHAR(20),
+    id_ciudad_fk INT NOT NULL,
+    direccion VARCHAR(50),
     email VARCHAR(50),
     telefono INT,
-	fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP,
+	fecha_hora_crear  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
     foreign key(id_departamento_fk) references departamentos (id_departamento),
+    foreign key(id_ciudad_fk) references ciudades(id_ciudad), 
     foreign key(tipo_documento_fk) references tipo_documento (tipo_documento)
 );
