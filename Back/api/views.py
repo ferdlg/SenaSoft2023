@@ -7,6 +7,7 @@ from django.shortcuts import render
 from .models import Empleados
 from .models import Departamentos
 from .models import Ciudades
+from .models import TipoDocumento
 from django.views import View
 from django.http.response import JsonResponse 
 import requests #libreria requerida para api externa
@@ -75,18 +76,33 @@ class EmpleadosView(View):
             return JsonResponse(datos)
     
     def post (self, request):
+
         json_data = json.loads(request.body)
-        Empleados.objects.create(tipo_documento_fk = json_data ['tipo_documento_fk'],
+        #para los campos que son llaves foraneas se buscan primero las instancias
+        #obtener el valor  de id_tipo_documento del json_data 
+        id_tipo_documento= json_data['id_tipo_documento_fk']
+        # Obtener la instancia de TipoDocumento correspondiente al ID 
+        tipo_documento = TipoDocumento.objects.get(id_tipo_documento = id_tipo_documento)
+
+        id_departamento = json_data['id_departamento_fk']
+        departamento = Departamentos.objects.get(id_departamento=id_departamento)
+        id_ciudad = json_data['id_ciudad_fk']
+        ciudad = Ciudades.objects.get(id_ciudad =id_ciudad)
+
+        Empleados.objects.create(
+                                id_tipo_documento_fk = tipo_documento,
                                 numero_documento = json_data ['numero_documento'],
                                 nombres_empleado= json_data['nombres_empleado'],
                                 apellidos_empleado = json_data['apellidos_empleado'],
-                                id_departamento_fk =json_data['apellidos_empleado'],
-                                id_ciudad_fk = json_data['id_ciudad_fk'],
+                                id_departamento_fk =departamento,
+                                id_ciudad_fk = ciudad,
                                 direccion = json_data['direccion'],
                                 email = json_data['email'],
                                 telefono = json_data['telefono']
                                 )
-        return 
+        
+        datos = {'message':"Succes"}
+        return JsonResponse(datos)
 
     def put (self, request, id):
         json_data = json.loads(request.body)
@@ -127,3 +143,4 @@ def paginar_registros (request):
     num_pagina = 1
     pagina = paginator.get_page(num_pagina)
     return
+

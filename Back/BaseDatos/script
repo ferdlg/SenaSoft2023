@@ -19,13 +19,14 @@ CREATE TABLE CIUDADES(
     foreign key(id_departamento_fk) references departamentos (id_departamento)
 );
 CREATE TABLE TIPO_DOCUMENTO(
-	tipo_documento VARCHAR(10) NOT NULL,
-    primary key(tipo_documento)
+	id_tipo_documento INT auto_increment NOT NULL,
+	nombre_tipo_documento VARCHAR(10) NOT NULL,
+    primary key(id_tipo_documento)
 );
 CREATE TABLE EMPLEADOS (
 	id_empleado INT AUTO_INCREMENT NOT NULL,
     primary key (id_empleado),
-    tipo_documento_fk VARCHAR(10) NOT NULL,
+    id_tipo_documento_fk INT NOT NULL,
     numero_documento INT, 
     nombres_empleado VARCHAR(30),
     apellidos_empleado VARCHAR(50),
@@ -38,5 +39,7 @@ CREATE TABLE EMPLEADOS (
     fecha_hora_modificar DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
     foreign key(id_departamento_fk) references departamentos (id_departamento),
     foreign key(id_ciudad_fk) references ciudades(id_ciudad), 
-    foreign key(tipo_documento_fk) references tipo_documento (tipo_documento)
+    foreign key(id_tipo_documento_fk) references tipo_documento (id_tipo_documento)
 );
+
+INSERT INTO tipo_documento (nombre_tipo_documento) VALUES ('CC'),('CE'),('TI'),('RC')

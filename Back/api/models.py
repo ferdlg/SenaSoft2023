@@ -25,7 +25,7 @@ class Departamentos(models.Model):
 
 class Empleados(models.Model):
     id_empleado = models.AutoField(primary_key=True)
-    tipo_documento_fk = models.ForeignKey('TipoDocumento', models.DO_NOTHING, db_column='tipo_documento_fk')
+    id_tipo_documento_fk = models.ForeignKey('TipoDocumento', models.DO_NOTHING, db_column='id_tipo_documento_fk')
     numero_documento = models.IntegerField(blank=True, null=True)
     nombres_empleado = models.CharField(max_length=30, blank=True, null=True)
     apellidos_empleado = models.CharField(max_length=50, blank=True, null=True)
@@ -43,7 +43,8 @@ class Empleados(models.Model):
 
 
 class TipoDocumento(models.Model):
-    tipo_documento = models.CharField(primary_key=True, max_length=10)
+    id_tipo_documento = models.AutoField(primary_key=True)
+    nombre_tipo_documento = models.CharField(max_length=10)
 
     class Meta:
         managed = False
