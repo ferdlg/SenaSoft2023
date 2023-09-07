@@ -13,6 +13,7 @@ import requests #libreria requerida para api externa
 import json
 
 
+#Obtener datos de una API externa mediante una funcion 
 def obtener_departamentos(request):
 
     url = 'https://api-colombia.com/api/v1/Department'
@@ -24,27 +25,19 @@ def obtener_departamentos(request):
         #procesar los datos de departamentos
         departamentos =[]
         for departamento_data in data:
-            nombre_departamento = departamento_data.get('name','')
-            if nombre_departamento:
-                Departamentos.objects.get_or_create(nombre_departamento=nombre_departamento) #Si hay una instancia de departamento que no existe, la crea
-                departamentos.append(nombre_departamento) #Agregar el departamento a la lista
+            nombre_departamento = departamento_data.get('name','') #obtener nombre del departamento
+            id_departamento = departamento_data.get('id', None) #obtener id del departamento 
+            if nombre_departamento and id_departamento:
+                Departamentos.objects.get_or_create(id=id_departamento,nombre_departamento=nombre_departamento) #Si hay una instancia de departamento que no existe, la crea
+                departamentos.append({'id': id_departamento, 'nombre': nombre_departamento})
         return JsonResponse({'departamentos': departamentos})
     else:
         return JsonResponse({'error':'No se pudieron obtener datos de la API externa'}, status=500)
     
-def paginar_registros (request):
-    cantidad_empleados = Empleados.objects.count()
-    registros_pagina = 10 
-    todos_empleados = Empleados.objects.all()
-
-    paginator = Paginator(todos_empleados, registros_pagina)
-
-    num_pagina = 1
-    pagina = paginator.get_page(num_pagina)
-    return
 def obtener_ciudades_departamento(request, id):
     url=''
     response = requests.get(url)
+    
 
 class EmpleadosView(View):
 
@@ -112,3 +105,13 @@ class EmpleadosView(View):
         else:
             datos = {'message':"Empleado no encontrado..."}
         return     
+def paginar_registros (request):
+    cantidad_empleados = Empleados.objects.count()
+    registros_pagina = 10 
+    todos_empleados = Empleados.objects.all()
+
+    paginator = Paginator(todos_empleados, registros_pagina)
+
+    num_pagina = 1
+    pagina = paginator.get_page(num_pagina)
+    return
