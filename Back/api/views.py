@@ -26,7 +26,7 @@ def obtener_departamentos(request):
             nombre_departamento = departamento_data.get('name','') #obtener nombre del departamento
             id_departamento = departamento_data.get('id', None) #obtener id del departamento 
             if nombre_departamento and id_departamento:
-                Departamentos.objects.get_or_create(id=id_departamento,nombre_departamento=nombre_departamento) #Si hay una instancia de departamento que no existe, la crea
+                Departamentos.objects.get_or_create(id_departamento=id_departamento,nombre_departamento=nombre_departamento) #Si hay una instancia de departamento que no existe, la crea
                 departamentos.append({'id': id_departamento, 'Departamento': nombre_departamento})
         return JsonResponse({'departamentos': departamentos})
     else:
@@ -43,9 +43,10 @@ def obtener_ciudades_departamento(request):
             id_departamento_fk = ciudad_data.get('departmentId',None)
             nombre_ciudad= ciudad_data.get('name','')
             if id_ciudad and id_departamento_fk and nombre_ciudad:
-                Ciudades.objects.get_or_create(id=id_ciudad, id_departamento_fk=id_departamento_fk,nombre_ciudad=nombre_ciudad)
+                departamento = Departamentos.objects.get(id_departamento=id_departamento_fk)
+                ciudad, create = Ciudades.objects.get_or_create(id_ciudad = id_ciudad,id_departamento_fk=departamento, nombre_ciudad=nombre_ciudad)
                 ciudades.append({'id': id_ciudad, 'idDepartamento':id_departamento_fk, 'Ciudad':nombre_ciudad})
-        return JsonResponse({'Ciudades': ciudades})
+        return JsonResponse({'id':id_ciudad,'Ciudades': ciudades})
     else:
         return JsonResponse({'error':'No se pudieron obtener datos de la API externa'}, status=500)
         
