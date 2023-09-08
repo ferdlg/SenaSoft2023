@@ -1,5 +1,6 @@
-import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
+import MyButton from "../MyButton/MyButton";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline"
+import MyModal from "../MyModal/MyModal";
 import FormEmployes from '../FormEmployes/FormEmployes';
 import TableEmployes from "../TableEmployes/TableEmployes";
 import "./index.css"
@@ -193,11 +194,11 @@ const Employes = () =>{
     return <div className="DivEmployes">
         <div className="EmployesTitle">
           <h1>Empleados</h1>
-          <Button data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo Empleado +</Button>
+          <MyButton variant="contained" endIcon={<AddCircleOutline/>} >Nuevo Empleado</MyButton>
         </div>
-        <Modal title="Nuevo Empleado" optionName="Agregar Empleado">
+        <MyModal title="Nuevo Empleado" optionName="Agregar Empleado">
           <FormEmployes/>
-        </Modal>
+        </MyModal>
         <TableEmployes employes={empleados} />
     </div>
 }   
