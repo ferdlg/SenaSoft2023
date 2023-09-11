@@ -2,6 +2,14 @@ DROP DATABASE IF EXISTS nexos_db;
 CREATE DATABASE nexos_db;
 USE nexos_db;
 
+CREATE TABLE ROLES(
+	id_rol INT auto_increment NOT NULL,
+    nombre_rol VARCHAR(20),
+    primary key(id_rol)
+);
+
+
+
 CREATE TABLE DEPARTAMENTOS(
 	id_departamento INT  NOT NULL, 
     primary key (id_departamento),

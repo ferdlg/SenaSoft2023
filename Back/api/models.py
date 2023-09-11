@@ -8,19 +8,19 @@ class Ciudades(models.Model):
     nombre_ciudad = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
+        
         db_table = 'ciudades'
 
 
 class Departamentos(models.Model):
     id_departamento = models.IntegerField(primary_key=True)
-    codigo_departamento = models.IntegerField(blank=True, null=True)
+    codigo_departamento = models.IntegerField(blank=sTrue, null=True)
     nombre_departamento = models.CharField(max_length=30, blank=True, null=True)
     fecha_hora_crear = models.DateTimeField(auto_now_add= True)
     fecha_hora_modificar = models.DateTimeField(auto_now= True)
 
     class Meta:
-        managed = False
+        
         db_table = 'departamentos'
 
 class Empleados(models.Model):
@@ -38,7 +38,7 @@ class Empleados(models.Model):
     fecha_hora_modificar = models.DateTimeField(auto_now= True)
 
     class Meta:
-        managed = False
+        
         db_table = 'empleados'
 
 
@@ -47,6 +47,6 @@ class TipoDocumento(models.Model):
     nombre_tipo_documento = models.CharField(max_length=10)
 
     class Meta:
-        managed = False
+        
         db_table = 'tipo_documento'
 
