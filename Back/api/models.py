@@ -14,7 +14,7 @@ class Ciudades(models.Model):
 
 class Departamentos(models.Model):
     id_departamento = models.IntegerField(primary_key=True)
-    codigo_departamento = models.IntegerField(blank=sTrue, null=True)
+    codigo_departamento = models.IntegerField(blank=True, null=True)
     nombre_departamento = models.CharField(max_length=30, blank=True, null=True)
     fecha_hora_crear = models.DateTimeField(auto_now_add= True)
     fecha_hora_modificar = models.DateTimeField(auto_now= True)
