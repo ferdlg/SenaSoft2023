@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, TextField, Button, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
+import { TextField, Button, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
 import { Link } from 'react-router-dom';
 import EmployeeService from '../../services/EmployeeService';
-import Footer from "../../components/Footer";
-import SimpleNav from "../../components/SimpleNav";
 import Title from "../../components/Title";
 import "./Register.css"
 
@@ -74,190 +72,184 @@ const Register = () => {
     
 
     return (
-        <>
-            <SimpleNav />
-            <Container className="registerContainer">
-                <form className="registerForm border_moradoOscuro" onSubmit={handleSubmit}>
-                    <Title text="Registro de Usuario" />
-                    <div className="inputGroup">
-                        <FormControl className='select'>
-                            <InputLabel id="tipoDocLabel" color='secondary'>Tipo de Documento</InputLabel>
-                            <Select
-                                labelId="tipoDocLabel"
-                                name="id_tipo_documento_fk"
-                                value={inputs.id_tipo_documento_fk}
-                                onChange={handleChange}
-                                autoWidth
-                                label="Tipo de Documento"
-                                color='secondary'
-                                size='small'
-                            >
-                                {tipoDocOptions.map((option, index) => (
-                                    <MenuItem key={index} value={option.id}>
-                                        {option.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <TextField
-                            size="small"
-                            name="numero_documento"
-                            label="Número de Documento"
-                            required
-                            value={inputs.numero_documento}
-                            onChange={handleChange}
-                            error={!inputs.numero_documento}
-                            helperText={!inputs.numero_documento ? 'Ingrese un número de documento' : ''}
-                            inputProps={{ maxLength: 10 }}
-                            color="secondary"
-                            type='number'
-                        />
-                        <TextField
-                            size="small"
-                            name="nombres_empleado"
-                            label="Nombres"
-                            required
-                            value={inputs.nombres_empleado}
-                            onChange={handleChange}
-                            error={!inputs.nombres_empleado}
-                            helperText={!inputs.nombres_empleado ? 'Ingrese un nombre' : ''}
-                            inputProps={{ maxLength: 30 }}
-                            color="secondary"
-                        />
-                        
-                        <TextField
-                            size="small"
-                            name="apellidos_empleado"
-                            label="apellidos_empleado"
-                            required
-                            value={inputs.user}
-                            onChange={(e)=>{
-                                const {name, value} = e.target;
-                                setInputs({
-                                    ...inputs,
-                                    [name]: value
-                                })
-                            }}
-                            error={!inputs.apellidos_empleado}
-                            helperText={
-                                !inputs.apellidos_empleado ? 'Ingrese un usuario' : ''
-                            }
-                            inputProps={{ maxLength: 50 }}
-                            color="secondary" 
-                        />
-                        <FormControl className='select'>
-                            <InputLabel id="departamentoLabel" color='secondary'>Departamento</InputLabel>
-                            <Select
-                                labelId="departamentoLabel"
-                                name="id_departamento_fk"
-                                value={inputs.id_departamento_fk}
-                                onChange={handleChange}
-                                autoWidth
-                                label="Departamento"
-                                color='secondary'
-                                size='small'
-                                onBlur={() => handleDepartamentoChange(inputs.id_departamento_fk)}
-                            >
-                                {departamentos.map((option, index) => (
-                                    <MenuItem key={index} value={option.id}>
-                                        {option.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <FormControl className='select'>
-                            <InputLabel id="ciudadLabel" color='secondary'>Ciudad</InputLabel>
-                            <Select
-                                labelId="ciudadLabel"
-                                name="id_ciudad_fk"
-                                value={inputs.id_ciudad_fk}
-                                onChange={handleChange}
-                                autoWidth
-                                label="Ciudad"
-                                color='secondary'
-                                size='small'
-                            >
-                                {ciudades.map((option, index) => (
-                                    <MenuItem key={index} value={option.id}>
-                                        {option.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+        <form className="registerForm border_moradoOscuro" onSubmit={handleSubmit}>
+            <Title text="Registro de Usuario" />
+            <div className="inputGroup">
+                <FormControl className='select'>
+                    <InputLabel id="tipoDocLabel" color='secondary'>Tipo de Documento</InputLabel>
+                    <Select
+                        labelId="tipoDocLabel"
+                        name="id_tipo_documento_fk"
+                        value={inputs.id_tipo_documento_fk}
+                        onChange={handleChange}
+                        autoWidth
+                        label="Tipo de Documento"
+                        color='secondary'
+                        size='small'
+                    >
+                        {tipoDocOptions.map((option, index) => (
+                            <MenuItem key={index} value={option.id}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <TextField
+                    size="small"
+                    name="numero_documento"
+                    label="Número de Documento"
+                    required
+                    value={inputs.numero_documento}
+                    onChange={handleChange}
+                    error={!inputs.numero_documento}
+                    helperText={!inputs.numero_documento ? 'Ingrese un número de documento' : ''}
+                    inputProps={{ maxLength: 10 }}
+                    color="secondary"
+                    type='number'
+                />
+                <TextField
+                    size="small"
+                    name="nombres_empleado"
+                    label="Nombres"
+                    required
+                    value={inputs.nombres_empleado}
+                    onChange={handleChange}
+                    error={!inputs.nombres_empleado}
+                    helperText={!inputs.nombres_empleado ? 'Ingrese un nombre' : ''}
+                    inputProps={{ maxLength: 30 }}
+                    color="secondary"
+                />
+                
+                <TextField
+                    size="small"
+                    name="apellidos_empleado"
+                    label="apellidos_empleado"
+                    required
+                    value={inputs.user}
+                    onChange={(e)=>{
+                        const {name, value} = e.target;
+                        setInputs({
+                            ...inputs,
+                            [name]: value
+                        })
+                    }}
+                    error={!inputs.apellidos_empleado}
+                    helperText={
+                        !inputs.apellidos_empleado ? 'Ingrese un usuario' : ''
+                    }
+                    inputProps={{ maxLength: 50 }}
+                    color="secondary" 
+                />
+                <FormControl className='select'>
+                    <InputLabel id="departamentoLabel" color='secondary'>Departamento</InputLabel>
+                    <Select
+                        labelId="departamentoLabel"
+                        name="id_departamento_fk"
+                        value={inputs.id_departamento_fk}
+                        onChange={handleChange}
+                        autoWidth
+                        label="Departamento"
+                        color='secondary'
+                        size='small'
+                        onBlur={() => handleDepartamentoChange(inputs.id_departamento_fk)}
+                    >
+                        {departamentos.map((option, index) => (
+                            <MenuItem key={index} value={option.id}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl className='select'>
+                    <InputLabel id="ciudadLabel" color='secondary'>Ciudad</InputLabel>
+                    <Select
+                        labelId="ciudadLabel"
+                        name="id_ciudad_fk"
+                        value={inputs.id_ciudad_fk}
+                        onChange={handleChange}
+                        autoWidth
+                        label="Ciudad"
+                        color='secondary'
+                        size='small'
+                    >
+                        {ciudades.map((option, index) => (
+                            <MenuItem key={index} value={option.id}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
-                        <TextField
-                            size="small"
-                            name="direccion"
-                            label="direccion"
-                            required
-                            value={inputs.direccion}
-                            onChange={(e)=>{
-                                const {name, value} = e.target;
-                                setInputs({
-                                    ...inputs,
-                                    [name]: value
-                                })
-                            }}
-                            error={!inputs.direccion}
-                            helperText={
-                                !inputs.direccion ? 'Ingrese un la dirección' : ''
-                            }
-                            inputProps={{ maxLength: 50 }}
-                            color="secondary" 
-                        />
-                        <TextField
-                            size="small"
-                            name="email"
-                            label="email"
-                            required
-                            value={inputs.email}
-                            onChange={(e)=>{
-                                const {name, value} = e.target;
-                                setInputs({
-                                    ...inputs,
-                                    [name]: value
-                                })
-                            }}
-                            error={!inputs.email}
-                            helperText={
-                                !inputs.email ? 'Ingrese un correo electrónico' : ''
-                            }
-                            inputProps={{ maxLength: 50 }}
-                            color="secondary" 
-                            type='email'
-                        />
-                        <TextField
-                            size="small"
-                            name="telefono"
-                            label="telefono"
-                            required
-                            value={inputs.telefono}
-                            onChange={(e)=>{
-                                const {name, value} = e.target;
-                                setInputs({
-                                    ...inputs,
-                                    [name]: value
-                                })
-                            }}
-                            error={!inputs.telefono}
-                            helperText={
-                                !inputs.telefono ? 'Ingrese un teléfono' : ''
-                            }
-                            inputProps={{ maxLength: 10 }}
-                            type='number'
-                            color="secondary" 
-                        />
-                    </div>
-                    <Button type="submit" variant="contained" color="secondary">
-                        Registrarse
-                    </Button>
-                    <p>
-                        ¿Tienes cuenta? <Link to="/login" className="cl_moradoOscuro">Inicia Sesión</Link>
-                    </p>
-                </form>
-            </Container>
-            <Footer />
-        </>
+                <TextField
+                    size="small"
+                    name="direccion"
+                    label="direccion"
+                    required
+                    value={inputs.direccion}
+                    onChange={(e)=>{
+                        const {name, value} = e.target;
+                        setInputs({
+                            ...inputs,
+                            [name]: value
+                        })
+                    }}
+                    error={!inputs.direccion}
+                    helperText={
+                        !inputs.direccion ? 'Ingrese un la dirección' : ''
+                    }
+                    inputProps={{ maxLength: 50 }}
+                    color="secondary" 
+                />
+                <TextField
+                    size="small"
+                    name="email"
+                    label="email"
+                    required
+                    value={inputs.email}
+                    onChange={(e)=>{
+                        const {name, value} = e.target;
+                        setInputs({
+                            ...inputs,
+                            [name]: value
+                        })
+                    }}
+                    error={!inputs.email}
+                    helperText={
+                        !inputs.email ? 'Ingrese un correo electrónico' : ''
+                    }
+                    inputProps={{ maxLength: 50 }}
+                    color="secondary" 
+                    type='email'
+                />
+                <TextField
+                    size="small"
+                    name="telefono"
+                    label="telefono"
+                    required
+                    value={inputs.telefono}
+                    onChange={(e)=>{
+                        const {name, value} = e.target;
+                        setInputs({
+                            ...inputs,
+                            [name]: value
+                        })
+                    }}
+                    error={!inputs.telefono}
+                    helperText={
+                        !inputs.telefono ? 'Ingrese un teléfono' : ''
+                    }
+                    inputProps={{ maxLength: 10 }}
+                    type='number'
+                    color="secondary" 
+                />
+            </div>
+            <Button type="submit" variant="contained" color="secondary">
+                Registrarse
+            </Button>
+            <p>
+                ¿Tienes cuenta? <Link to="/login" className="cl_moradoOscuro">Inicia Sesión</Link>
+            </p>
+        </form>
     );
 }
 

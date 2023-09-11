@@ -81,3 +81,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.principalContainer{
+  display: flex !important;
+  height: calc(100vh - 60px - 60px);
+}
