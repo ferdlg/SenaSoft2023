@@ -19,7 +19,7 @@ const FullNav = () =>{
             <Container className="cl_blanco fullNav">
                 <Title text="SenaSoft"/>
                 <div>
-                    <Link to="/Empleados" className="cl_blanco">Empleados</Link>
+                    <Link to="/" className="cl_blanco">Empleados</Link>
                     <Fragment>
                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                         <IconButton
