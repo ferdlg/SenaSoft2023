@@ -1,0 +1,26 @@
+.registerContainer{
+    display: flex !important;
+    min-height: calc(100vh - 58px - 60px);
+}
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 800px;
+}
+
+.inputGroup{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: inherit;
+}
+
+.select{
+    min-width: 220px !important;
+}

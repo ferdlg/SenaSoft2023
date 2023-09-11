@@ -1,0 +1,15 @@
+.loginContainer{
+    display: flex !important;
+    height: calc(100vh - 58px - 60px);
+}
+
+.loginForm{
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 16px;
+}
