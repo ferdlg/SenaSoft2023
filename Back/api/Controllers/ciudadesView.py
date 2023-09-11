@@ -1,9 +1,9 @@
 from typing import Any
 from django import http
 from django.shortcuts import render
-from models import Departamentos
-from models import Ciudades
-from django.views import View
+from api.models import Departamentos
+from api.models import Ciudades
+from api.serializers import CiudadesSerializer
 from django.http.response import JsonResponse 
 import requests #libreria requerida para api externa
 import json

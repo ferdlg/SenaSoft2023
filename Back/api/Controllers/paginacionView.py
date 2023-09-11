@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from models import Empleados
+from api.models import Empleados
 
 def paginar_registros (request):
     cantidad_empleados = Empleados.objects.count()

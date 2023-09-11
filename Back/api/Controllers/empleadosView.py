@@ -4,10 +4,10 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from models import Empleados
-from models import Departamentos
-from models import Ciudades
-from models import TipoDocumento
+from api.models import Empleados
+from api.models import Departamentos
+from api.models import Ciudades
+from api.models import TipoDocumento
 from django.views import View
 from django.http.response import JsonResponse 
 import requests #libreria requerida para api externa

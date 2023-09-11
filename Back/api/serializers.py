@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Departamentos
-from .models import Empleados
-from .models import Ciudades
-from .models import TipoDocumento
+from api.models import Departamentos
+from api.models import Empleados
+from api.models import Ciudades
+from api.models import TipoDocumento
 
 #serializador para los datos = formato JSON 
 class DepartamentosSerializer(serializers.Serializer):
