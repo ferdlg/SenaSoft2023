@@ -69,13 +69,15 @@ const FullNav = () =>{
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                     >
                         <MenuItem onClick={handleClose}>
-                        <Avatar /> Perfil
+                        <Link className="linkPerfil" to="/perfil">
+                            <Avatar /> Perfil
+                        </Link>
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={handleClose}>
-                        <ListItemIcon>
+                        <Link className="linkPerfil" to="/login">
                             <Logout fontSize="small" />
-                        </ListItemIcon>
+                        </Link>
                         Logout
                         </MenuItem>
                     </Menu>
