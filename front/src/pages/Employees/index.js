@@ -1,7 +1,10 @@
-import { Container } from "@mui/material";
-import "./Employees.css"
+import { useState } from "react";
+import { Button } from "@mui/material";
 import TableEmployes from "../../components/TableEmployes/TableEmployes";
 import Title from "../../components/Title";
+import MyModal from "../../components/MyModal";
+import NewEmployee from "./components/NewEmployee";
+import "./Employees.css"
 
 const Employees = () => {
     const empleados = [
@@ -188,9 +191,21 @@ const Employees = () => {
             "UpdateDate": ""
         }
       ]
+    
+    // Para el modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return(
         <>
-            <Title text="Empleados"/>
+            <div className="title_employees">
+                <Title text="Empleados"/>
+                <Button onClick={handleOpen} color="secondary" variant="outlined">Agregar Empleado</Button>
+            </div>
+            <MyModal open={open} onClose={handleClose}>
+                <NewEmployee/>
+            </MyModal>
             <TableEmployes employees={empleados}/>
         </>
     )
