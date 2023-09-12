@@ -1,4 +1,5 @@
 import { Modal, Box } from "@mui/material";
+import "./MyModal.css"
 
 const MyModal = ({ open, onClose, children }) => {
     const modalStyle = {
@@ -15,7 +16,7 @@ const MyModal = ({ open, onClose, children }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         >
-        <Box sx={modalStyle}>
+        <Box sx={modalStyle} className="modalContainer bg_blanco border_moradoOscuro">
             {children}
         </Box>
         </Modal>

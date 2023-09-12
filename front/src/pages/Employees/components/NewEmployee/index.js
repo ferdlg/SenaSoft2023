@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
+import { TextField, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
 import EmployeeService from '../../../../services/EmployeeService';
 import Title from "../../../../components/Title";
 import "./NewEmployee.css"
@@ -71,7 +71,7 @@ const NewEmployee = () => {
     
 
     return (
-        <form className="NewEmployee border_moradoOscuro bg_blanco" onSubmit={handleSubmit}>
+        <form className="NewEmployee" onSubmit={handleSubmit}>
             <Title text="Nuevo empleado" />
             <div className="inputGroup">
                 <FormControl className='select'>
@@ -241,14 +241,6 @@ const NewEmployee = () => {
                     type='number'
                     color="secondary" 
                 />
-            </div>
-            <div className='inputGroup'>
-                <Button variant="contained" color="error">
-                    Cancelar
-                </Button>
-                <Button type="submit" variant="contained" color="secondary">
-                    Nuevo Empleado
-                </Button>
             </div>
         </form>
     );

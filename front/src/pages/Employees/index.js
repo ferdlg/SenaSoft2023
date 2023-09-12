@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
+import { Add, Cancel } from "@mui/icons-material";
 import TableEmployes from "../../components/TableEmployes/TableEmployes";
 import Title from "../../components/Title";
 import MyModal from "../../components/MyModal";
@@ -204,7 +205,15 @@ const Employees = () => {
                 <Button onClick={handleOpen} color="secondary" variant="outlined">Agregar Empleado</Button>
             </div>
             <MyModal open={open} onClose={handleClose}>
-                <NewEmployee/>
+                    <NewEmployee/>
+                    <div className='btnGroup'>
+                        <Button onClick={handleClose} variant="contained" color="error" startIcon={<Cancel/>}>
+                            Cancelar
+                        </Button>
+                        <Button type="submit" variant="contained" color="secondary" startIcon={<Add/>} >
+                            Nuevo Empleado
+                        </Button>
+                    </div>  
             </MyModal>
             <TableEmployes employees={empleados}/>
         </>

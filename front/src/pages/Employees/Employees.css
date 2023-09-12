@@ -3,3 +3,11 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.btnGroup{
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
