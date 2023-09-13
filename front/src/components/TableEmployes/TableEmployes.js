@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Button } from '@mui/material';
 import "./index.css"
 
 const TableEmployes = ({ employees }) => {
@@ -37,6 +37,22 @@ const TableEmployes = ({ employees }) => {
     setPage(0);
   };
 
+  // Opciones
+  
+  // Para opciones de la tabla
+  const handleEditEmployee = (employeeId) => {
+    // Implementa la lógica para editar el empleado con el ID proporcionado
+    console.log("Edit")
+  };
+  
+  const handleViewEmployee = (employeeId) => {
+    // Implementa la lógica para ver los detalles del empleado con el ID proporcionado
+  };
+  
+  const handleDeleteEmployee = (employeeId) => {
+    // Implementa la lógica para eliminar el empleado con el ID proporcionado
+  };
+
   // Filtra los empleados basados en los criterios de búsqueda
 const filteredEmployes = employees.filter((employee) => {
   // Se convierte a minúscula la información de cada empleado para que se pueda realizar la busqueda sin sensibilidad a Mayúsculas/Minúsculas
@@ -61,16 +77,33 @@ const filteredEmployes = employees.filter((employee) => {
     TipoDoc.includes(filterTipoDoc) &&
     NumDoc.includes(filterNumDoc) &&
     Departamento.includes(filterDepartamento)
-  );
+  )  
 });
 const columns = [
-  {id: 'Nombres', label: 'Nombres', minWidth: 170, align: 'center', format: ''},
+  {id: 'Nombres', label: 'Nombres', minWidth: 100, align: 'center', format: ''},
   {id: 'Apellidos', label: 'Apellidos', minWidth: 170, align: 'center', format: ''},
   {id: 'TipoDoc', label: 'TipoDoc', minWidth: 170, align: 'center', format: ''},
   {id: 'NumDoc', label: 'NumDoc', minWidth: 170, align: 'center', format: ''},
   {id: 'Departamento', label: 'Departamento', minWidth: 170, align: 'center', format: ''},
+  {id: 'Acciones', label: 'Acciones', minWidth: 100, align: 'center', format: '' },
 ]
-const rows = filteredEmployes;
+const rows = filteredEmployes.map((employee) => ({
+  ...employee,
+  Acciones: (
+    <div className='OpcionesTable'> 
+      <Button color='secondary' onClick={() => handleEditEmployee(employee.NumDoc)}>
+        Editar
+      </Button>
+      <Button color='secondary' onClick={() => handleViewEmployee(employee.NumDoc)}>
+        Ver
+      </Button>
+      <Button color='secondary' onClick={() => handleDeleteEmployee(employee.NumDoc)}>
+        Eliminar
+      </Button>
+    </div>
+  ),
+}));
+
 return (
   
   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -81,9 +114,9 @@ return (
         <TableRow>
         <TableCell>
           <div className="tableHead">
-            <label>
+            <strong className='cl_moradoOscuro'>
               Nombres
-            </label>
+            </strong>
             <input
               type="text"
               name="Nombres"
@@ -95,9 +128,9 @@ return (
         </TableCell>
         <TableCell>
           <div className="tableHead">
-          <label>
+          <strong className='cl_moradoOscuro'>
               Apellidos
-            </label>
+            </strong>
             <input
               type="text"
               name="Apellidos"
@@ -109,9 +142,9 @@ return (
         </TableCell>
         <TableCell>
           <div className="tableHead">
-          <label>
+          <strong className='cl_moradoOscuro'>
               Tipo Documento
-            </label>
+            </strong>
             <input
               type="text"
               name="TipoDoc"
@@ -123,9 +156,9 @@ return (
         </TableCell>
         <TableCell>
           <div className="tableHead">
-          <label>
+          <strong className='cl_moradoOscuro'>
               Número Documento
-            </label>
+            </strong>
             <input
               type="text"
               name="NumDoc"
@@ -137,9 +170,9 @@ return (
         </TableCell>
         <TableCell>
           <div className="tableHead">
-          <label>
+          <strong className='cl_moradoOscuro'>
               Departamento
-            </label>
+            </strong>
             <input
               type="text"
               name="Departamento"
@@ -148,6 +181,11 @@ return (
               placeholder="Buscar"
             />
           </div>
+        </TableCell>
+        <TableCell>
+          <strong className='OpcionesTable cl_moradoOscuro'> 
+            Opciones  
+          </strong>
         </TableCell>
             </TableRow>
         </TableHead>

@@ -155,7 +155,7 @@ const Register = () => {
                     >
                         {departamentos.map((option, index) => (
                             <MenuItem key={index} value={option.id}>
-                                {option.name}
+                                {option.Departamento}
                             </MenuItem>
                         ))}
                     </Select>
