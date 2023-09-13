@@ -11,7 +11,7 @@ import json
 def filtro_ciudades (request):
     if request.method == 'POST':
             #leer la solicitud en json 
-            data = json.loads(request.body.decode('uft-8'))
+            data = json.loads(request.body)
             if "departamento_id" in data:
                 '''id_departamento = campo en la bd
                 departamento_id = campo en el json '''
