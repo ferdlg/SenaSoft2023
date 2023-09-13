@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Employees from './pages/Employees';
 import "./index.css"
 import { Container } from '@mui/material';
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
             <Route 
               path='/register' 
               element={<Register />} 
+            /> 
+            <Route 
+              path='/Account' 
+              element={<Account />} 
             /> 
             <Route 
               path='/' 

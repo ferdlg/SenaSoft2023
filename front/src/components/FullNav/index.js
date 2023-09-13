@@ -69,7 +69,7 @@ const FullNav = () =>{
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                     >
                         <MenuItem onClick={handleClose}>
-                        <Link className="linkPerfil" to="/perfil">
+                        <Link className="linkPerfil" to="/Account">
                             <Avatar /> Perfil
                         </Link>
                         </MenuItem>
