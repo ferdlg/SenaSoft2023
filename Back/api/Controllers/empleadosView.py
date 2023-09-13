@@ -82,7 +82,7 @@ class EmpleadosView(View):
             empleado.tipo_documento_fk = tipo_documento
             empleado.id_departamento_fk = departamento
             empleado.id_ciudad_fk = ciudad  
-          
+            
             # Actualizar datos no foraneos 
             empleado.numero_documento = json_data['numero_documento']
             empleado.nombres_empleado = json_data['nombres_empleado']
@@ -105,3 +105,6 @@ class EmpleadosView(View):
         else:
             datos = {'message':"Empleado no encontrado..."}
         return 
+    
+
+   
