@@ -15,12 +15,30 @@ class CiudadesSerializer(serializers.ModelSerializer):
         model = Ciudades
         fields = '__all__'
 
-class EmpleadosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Empleados
-        fields = '__all__'
-
 class TipoDocumentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoDocumento
         fields = '__all__'
+
+
+class EmpleadosSerializer(serializers.ModelSerializer):
+    tipo_documento = TipoDocumentoSerializer(source = 'id_tipo_documento_fk', read_only = True)
+    departamento = DepartamentosSerializer(source = 'id_departamento_fk', read_only = True)
+    class Meta:
+        model = Empleados
+        fields = [
+            'id_empleado',
+            'id_tipo_documento_fk',
+            'numero_documento',
+            'nombres_empleado',
+            'apellidos_empleado',
+            'id_departamento_fk',
+            'id_ciudad_fk',
+            'direccion',
+            'email',
+            'telefono',
+            'fecha_hora_crear',
+            'tipo_documento',
+            'departamento'
+         ]
+

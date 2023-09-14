@@ -10,8 +10,8 @@ import json
 @csrf_exempt 
 def filtro_ciudades ( request, id_departamento):
             try: 
-                id_departamento_fk = request.GET.get('id_departamento_fk')
-                ciudades = list(Ciudades.objects.filter(id_departamento = id_departamento_fk).values())
+                
+                ciudades = list(Ciudades.objects.filter(id_departamento_fk = id_departamento).values())
                 if(ciudades):
                     return JsonResponse({'ciudades':ciudades})
                 else:

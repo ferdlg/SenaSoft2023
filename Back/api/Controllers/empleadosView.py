@@ -12,6 +12,7 @@ from django.views import View
 from django.http.response import JsonResponse 
 import requests #libreria requerida para api externa
 import json
+from ..serializers import EmpleadosSerializer
 
 class EmpleadosView(View):
 
@@ -19,19 +20,20 @@ class EmpleadosView(View):
     def dispatch(self, request, *args, **kwargs): #metodo para ignorar el error del csrf tempoarlmente
         return super().dispatch(request, *args, **kwargs)
 
-    def get (self, resquest, id=0):
-        if (id>0):
-            empleados = list(Empleados.objects.filter(id=id).values())
+    def get (self, resquest, id=None):
+        if id is not None and id>0:
+            empleados = list(Empleados.objects.filter(id_empleado=id).values())
             if len (empleados)>0:
                 empleado = empleados[0]
-                datos = {'message':"Succes", 'empleados':empleados}
+                datos = {'message':"Succes", 'empleados':empleado}
             else: 
                 datos = {'message':"Empleado no encontrado..."}
                 return JsonResponse(datos)
-        else:    
-            empleados = list(Empleados.objects.values())
+        else:
+            empleados = Empleados.objects.all()
+            serializer = EmpleadosSerializer(empleados, many = True)
             if len(empleados)>0:
-                datos = {'message':"Succes", 'empleados':empleados}
+                datos = {'message':"Succes", 'empleados':serializer.data}
             else: 
                 datos = {'message':"Empleados no encontrados..."}
             return JsonResponse(datos)
