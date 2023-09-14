@@ -22,17 +22,15 @@ class TipoDocumentoSerializer(serializers.ModelSerializer):
 
 
 class EmpleadosSerializer(serializers.ModelSerializer):
-    tipo_documento = TipoDocumentoSerializer(source = 'id_tipo_documento_fk', read_only = True)
+    tipo_documento = TipoDocumentoSerializer(source = 'id_tipo_documento_fk', read_only = True) # traer datos de otros modelos para mostrar en el front
     departamento = DepartamentosSerializer(source = 'id_departamento_fk', read_only = True)
     class Meta:
         model = Empleados
         fields = [
             'id_empleado',
-            'id_tipo_documento_fk',
             'numero_documento',
             'nombres_empleado',
             'apellidos_empleado',
-            'id_departamento_fk',
             'id_ciudad_fk',
             'direccion',
             'email',

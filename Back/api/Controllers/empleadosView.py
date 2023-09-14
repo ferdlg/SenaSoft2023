@@ -22,13 +22,13 @@ class EmpleadosView(View):
 
     def get (self, resquest, id=None):
         if id is not None and id>0:
-            empleados = list(Empleados.objects.filter(id_empleado=id).values())
-            if len (empleados)>0:
-                empleado = empleados[0]
-                datos = {'message':"Succes", 'empleados':empleado}
+            empleado = Empleados.objects.filter(id_empleado=id).first()
+            if  len (empleado)>0:
+                serializer = EmpleadosSerializer(empleado)
+                datos = {'message':"Succes", 'empleados':serializer.data}
             else: 
                 datos = {'message':"Empleado no encontrado..."}
-                return JsonResponse(datos)
+            return JsonResponse(datos)
         else:
             empleados = Empleados.objects.all()
             serializer = EmpleadosSerializer(empleados, many = True)
