@@ -1,9 +1,24 @@
 import axios from 'axios';
 
-const EmployeeService = {
+const url = 'http://127.0.0.1:8000/api/';
+
+const ApiService = {
+  
+  getEmployees: async () => {
+    try {
+      const urlEmployees = url+'empleados/';
+      const response = await axios.get(urlEmployees);
+      const data = response.data;
+      return data.empleados;
+    } catch (error) {
+      console.error("Error al cargar empleados: "+ error)
+      throw error;
+    }
+  },
+
   getDepartments: async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/departamentos/');
+      const response = await axios.get('departamentos/');
       const data = response.data.departamentos;
       
       // Verifica que data sea un array antes de usar map
@@ -33,4 +48,4 @@ const EmployeeService = {
   },
 };
 
-export default EmployeeService;
+export default ApiService;

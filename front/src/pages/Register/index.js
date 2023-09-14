@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
 import { Link } from 'react-router-dom';
-import EmployeeService from '../../services/EmployeeService';
+import ApiService from '../../services/ApiService';
 import Title from "../../components/Title";
 import "./Register.css"
 
@@ -31,7 +31,7 @@ const Register = () => {
 
     // Función para cargar los departamentos al cargar el componente
     useEffect(() => {
-        EmployeeService.getDepartments()
+        ApiService.getDepartments()
         .then((departamentosConId) => {
             setDepartamentos(departamentosConId);
         })
@@ -43,7 +43,7 @@ const Register = () => {
     // Función para manejar el cambio de departamento y cargar las ciudades
     const handleDepartamentoChange = (departamento) => {
         console.log("Departamento seleccionado:", departamento);
-        EmployeeService.getCitiesByDepartmentId(departamento)
+        ApiService.getCitiesByDepartmentId(departamento)
         .then((data) => {
             setCiudades(data);
         })
