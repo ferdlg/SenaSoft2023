@@ -51,3 +51,19 @@ CREATE TABLE EMPLEADOS (
 );
 
 INSERT INTO tipo_documento (nombre_tipo_documento) VALUES ('CC'),('CE'),('TI'),('RC')
+INSERT INTO EMPLEADOS (id_tipo_documento_fk, numero_documento, nombres_empleado, apellidos_empleado, id_departamento_fk, id_ciudad_fk, direccion, email, telefono, fecha_hora_crear, fecha_hora_modificar)
+VALUES
+    (1, '12345', 'Juan', 'Pérez', 1, 1, 'Calle 123', 'juan.perez@example.com', '123456789', '2023-09-04', '2023-09-04'),
+    (2, '67890', 'María', 'Gómez', 2, 2, 'Avenida 456', 'maria.gomez@example.com', '987654321', '2023-09-04', '2023-09-04'),
+    (3, '54321', 'Pedro', 'López', 3, 3, 'Carrera 789', 'pedro.lopez@example.com', '456789123', '2023-09-04', '2023-09-04'),
+    (4, '98765', 'Laura', 'Rodríguez', 4, 4, 'Diagonal 101', 'laura.rodriguez@example.com', '321654987', '2023-09-04', '2023-09-04'),
+    (1, '24680', 'Carlos', 'Sánchez', 5, 2, 'Calle 678', 'carlos.sanchez@example.com', '789123456', '2023-09-04', '2023-09-04'),
+    (2, '13579', 'Isabel', 'Martínez', 1, 1, 'Avenida 246', 'isabel.martinez@example.com', '987654321', '2023-09-04', '2023-09-04'),
+    (3, '86420', 'Luis', 'García', 3, 3, 'Carrera 135', 'luis.garcia@example.com', '456789123', '2023-09-04', '2023-09-04'),
+    (4, '98765', 'Ana', 'Pérez', 4, 4, 'Diagonal 202', 'ana.perez@example.com', '321654987', '2023-09-04', '2023-09-04'),
+    (1, '12345', 'David', 'Fernández', 5, 2, 'Calle 789', 'david.fernandez@example.com', '789123456', '2023-09-04', '2023-09-04'),
+    (2, '67890', 'Carmen', 'Gómez', 1, 1, 'Avenida 369', 'carmen.gomez@example.com', '987654321', '2023-09-04', '2023-09-04'),
+    (3, '54321', 'Miguel', 'López', 3, 3, 'Carrera 147', 'miguel.lopez@example.com', '456789123', '2023-09-04', '2023-09-04'),
+    (4, '98765', 'Elena', 'Rodríguez', 4, 4, 'Diagonal 303', 'elena.rodriguez@example.com', '321654987', '2023-09-04', '2023-09-04'),
+    (1, '24680', 'José', 'Sánchez', 5, 2, 'Calle 896', 'jose.sanchez@example.com', '789123456', '2023-09-04', '2023-09-04'),
+    (2, '13579', 'Mónica', 'Martínez', 1, 1, 'Avenida 456', 'monica.martinez@example.com', '987654321', '2023-09-04', '2023-09-04');
