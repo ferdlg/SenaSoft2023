@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from rest_framework.authentication import TokenAuthentication
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -117,7 +118,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  'nexos_db',
-        'PASSWORD': '1021662854',
+        'PASSWORD': '1234567890',
         'USER': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306',

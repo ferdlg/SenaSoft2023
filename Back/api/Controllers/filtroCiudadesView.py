@@ -8,17 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 @csrf_exempt 
-def filtro_ciudades (request):
-    if request.method == 'POST':
-            #leer la solicitud en json 
-            data = json.loads(request.body)
-            if "departamento_id" in data:
-                '''id_departamento = campo en la bd
-                departamento_id = campo en el json '''
-                id_departamento = data["departamento_id"]
-                departamento = Departamentos.objects.get(pk = id_departamento)
-                ciudades = Ciudades.objects.filter(id_departamento_fk = departamento)
-                serializer = CiudadesSerializer(ciudades, many=True)
-                return JsonResponse({'ciudades': serializer.data})
-            else:
-                return JsonResponse({'error':'seleccione un departamento valido'})
+def filtro_ciudades ( request, id_departamento):
+            try: 
+                id_departamento_fk = request.GET.get('id_departamento_fk')
+                ciudades = list(Ciudades.objects.filter(id_departamento = id_departamento_fk).values())
+                if(ciudades):
+                    return JsonResponse({'ciudades':ciudades})
+                else:
+                    return JsonResponse({'error':'seleccione un departamento valido'}, status = 400)
+            except Exception:
+                return JsonResponse({'error': str(Exception)}, status=400)
