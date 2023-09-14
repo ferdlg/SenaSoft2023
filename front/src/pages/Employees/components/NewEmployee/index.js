@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, InputLabel, MenuItem, Select, FormControl} from '@mui/material';
-import EmployeeService from '../../../../services/EmployeeService';
+import ApiService from '../../../../services/ApiService';
 import Title from "../../../../components/Title";
 import "./NewEmployee.css"
 
@@ -30,7 +30,7 @@ const NewEmployee = () => {
 
     // Función para cargar los departamentos al cargar el componente
     useEffect(() => {
-        EmployeeService.getDepartments()
+        ApiService.getDepartments()
         .then((departamentosConId) => {
             setDepartamentos(departamentosConId);
         })
@@ -42,7 +42,7 @@ const NewEmployee = () => {
     // Función para manejar el cambio de departamento y cargar las ciudades
     const handleDepartamentoChange = (departamento) => {
         console.log("Departamento seleccionado:", departamento);
-        EmployeeService.getCitiesByDepartmentId(departamento)
+        ApiService.getCitiesByDepartmentId(departamento)
         .then((data) => {
             setCiudades(data);
         })

@@ -9,5 +9,7 @@ urlpatterns = [
     path('departamentos/<int:pk>/ciudades/', views.CiudadListByDepartamento.as_view(), name='ciudad-list-by-departamento'),
     path('ciudades/', views.CiudadesList.as_view(), name='ciudad-list'),
     path('ciudades/<int:pk>/', views.CiudadesDetail.as_view(), name='ciudad-detail'),
+    path('empleados/', views.EmpleadosList.as_view(), name='empleados-list'),
+    path('empleados/<int:pk>/', views.EmpleadosDetail.as_view(), name='empleados-detail'),
     # Define rutas para otros modelos
 ]
