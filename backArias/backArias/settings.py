@@ -90,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  'nexos_db',
-        'PASSWORD': '666666',
+        'PASSWORD': '1234567890',
         'USER': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306',
