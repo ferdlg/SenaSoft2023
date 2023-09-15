@@ -23,7 +23,7 @@ class EmpleadosView(View):
     def get (self, resquest, id=None):
         if id is not None and id>0:
             empleado = Empleados.objects.filter(id_empleado=id).first()
-            if  len (empleado)>0:
+            if  (empleado):
                 serializer = EmpleadosSerializer(empleado)
                 datos = {'message':"Succes", 'empleados':serializer.data}
             else: 
