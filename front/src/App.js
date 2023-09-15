@@ -8,8 +8,13 @@ import Employees from './pages/Employees';
 import "./index.css"
 import { Container } from '@mui/material';
 import Account from './pages/Account';
+import { useEffect } from 'react';
+import { show_alert } from './utilities';
 
 function App() {
+  useEffect(()=>{
+    show_alert('Bienvenido al sistema', 'info')
+  },[])
   return (
     <BrowserRouter>
     {window.location.pathname !== "/login" && window.location.pathname !== "/register" ? <FullNav /> : <SimpleNav />}
