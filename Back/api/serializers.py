@@ -37,6 +37,7 @@ class EmpleadosSerializer(serializers.ModelSerializer):
             'telefono',
             'fecha_hora_crear',
             'tipo_documento',
-            'departamento'
+            'departamento',
+            'fecha_hora_modificar'
          ]
 
