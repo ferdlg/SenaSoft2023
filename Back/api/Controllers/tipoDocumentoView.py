@@ -5,7 +5,7 @@ from api.models import TipoDocumento
 from api.serializers import TipoDocumentoSerializer
 import json
 
-def mostrar_tipo_documento(self, request):
+def mostrar_tipo_documento(request):
     tipo_documento = TipoDocumento.objects.all()
     serializer = TipoDocumentoSerializer(tipo_documento, many=True)
 
