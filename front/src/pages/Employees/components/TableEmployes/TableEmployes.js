@@ -4,11 +4,11 @@ import './index.css';
 
 const TableEmployes = ({ employes }) => {
   const [searchFilters, setSearchFilters] = useState({
-    Nombres: '',
-    Apellidos: '',
-    TipoDoc: '',
-    NumDoc: '',
-    Departamento: '',
+    nombres_empleado: '',
+    apellidos_empleado: '',
+    tipo_documento: '',
+    numero_documento: '',
+    departamento: '',
   });
 
   const handleFilterChange = (e) => {
@@ -26,11 +26,11 @@ const TableEmployes = ({ employes }) => {
     const NumDoc = employe.numero_documento ? employe.numero_documento.toString().toLowerCase() : '';
     const Departamento = employe.departamento?.nombre_departamento ? employe.departamento.nombre_departamento.toLowerCase() : '';
     
-    const filter_Nombres = searchFilters.Nombres.toLowerCase();
-    const filter_Apellidos = searchFilters.Apellidos.toLowerCase();
-    const filter_TipoDoc = searchFilters.TipoDoc.toLowerCase();
-    const filter_NumDoc = searchFilters.NumDoc.toLowerCase();
-    const filter_Departamento = searchFilters.Departamento.toLowerCase();
+    const filter_Nombres = searchFilters.nombres_empleado.toLowerCase();
+    const filter_Apellidos = searchFilters.apellidos_empleado.toLowerCase();
+    const filter_TipoDoc = searchFilters.tipo_documento.toLowerCase();
+    const filter_NumDoc = searchFilters.numero_documento.toLowerCase();
+    const filter_Departamento = searchFilters.departamento.toLowerCase();
 
     return (
       Nombres.includes(filter_Nombres) &&
@@ -42,17 +42,14 @@ const TableEmployes = ({ employes }) => {
   });
 
   const handleEditEmployee = (employeeId) => {
-    // Implementa la lógica para editar el empleado con el ID proporcionado
     console.log(`Editar empleado con ID ${employeeId}`);
   };
 
   const handleViewEmployee = (employeeId) => {
-    // Implementa la lógica para ver los detalles del empleado con el ID proporcionado
     console.log(`Ver detalles del empleado con ID ${employeeId}`);
   };
 
   const handleDeleteEmployee = (employeeId) => {
-    // Implementa la lógica para eliminar el empleado con el ID proporcionado
     console.log(`Eliminar empleado con ID ${employeeId}`);
   };
 
@@ -60,7 +57,7 @@ const TableEmployes = ({ employes }) => {
     { id: 'nombres_empleado', label: 'Nombres', minWidth: 100, align: 'center' },
     { id: 'apellidos_empleado', label: 'Apellidos', minWidth: 170, align: 'center' },
     { id: 'tipo_documento', label: 'Tipo Documento', minWidth: 170, align: 'center' },
-    { id: 'numero_documento', label: 'Número Documento', minWidth: 170, align: 'center' },
+    { id: 'numero_documento', label: '# Documento', minWidth: 170, align: 'center' },
     { id: 'departamento', label: 'Departamento', minWidth: 170, align: 'center' },
     { id: 'Acciones', label: 'Acciones', minWidth: 100, align: 'center' },
   ];
@@ -103,16 +100,19 @@ const TableEmployes = ({ employes }) => {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell key={column.id} align={column.align}>
+                <TableCell key={column.id} align={column.align} className='tableHead'>
                   <div className="tableHead">
                     <strong className='cl_moradoOscuro'>{column.label}</strong>
-                    <TextField
+                    {column.id !== 'Acciones' ? (
+                    <input
                       type="text"
                       name={column.id}
                       value={searchFilters[column.id]}
                       onChange={handleFilterChange}
                       placeholder="Buscar"
+                      className='inputSearch border_moradoOscuro'
                     />
+                    ) : null}
                   </div>
                 </TableCell>
               ))}

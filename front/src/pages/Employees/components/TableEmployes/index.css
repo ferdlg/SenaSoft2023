@@ -3,3 +3,22 @@
     border-radius: 4px;
     width: auto;
 }
+
+.OpcionesTable{
+    display: flex;
+}
+
+.tableHead{
+    display: flex;
+    width: 120px;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+.inputSearch{
+    padding: 8px;
+    border-radius: 8px;
+    width: inherit;
+    text-align: center;
+}
