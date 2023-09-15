@@ -6,9 +6,13 @@
 #   * Remove ` ` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+
+# Create your models here.
+
+from django.db import models
 class Ciudades(models.Model):
     id_ciudad = models.IntegerField(primary_key=True)
-    id_departamento_fk = models.ForeignKey('Departamentos', models.DO_NOTHING, db_column='id_departamento_fk')
+    id_departamento_fk = models.ForeignKey('Departamentos', models.DO_NOTHING, db_column='id_departamento_fk', null= True)
     nombre_ciudad = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
@@ -33,7 +37,7 @@ class Empleados(models.Model):
     numero_documento = models.IntegerField(blank=True, null=True)
     nombres_empleado = models.CharField(max_length=30, blank=True, null=True)
     apellidos_empleado = models.CharField(max_length=50, blank=True, null=True)
-    id_departamento_fk = models.ForeignKey(Departamentos, models.DO_NOTHING, db_column='id_departamento_fk')
+    id_departamento_fk = models.ForeignKey(Departamentos, models.DO_NOTHING, db_column='id_departamento_fk', default=0)
     id_ciudad_fk = models.ForeignKey(Ciudades, models.DO_NOTHING, db_column='id_ciudad_fk')
     direccion = models.CharField(max_length=50, blank=True, null=True)
     email = models.CharField(max_length=50, blank=True, null=True)
@@ -53,4 +57,13 @@ class TipoDocumento(models.Model):
     class Meta:
         
         db_table = 'tipo_documento'
+
+class Roles(models.Model):
+    id_rol = models.AutoField(primary_key=True)
+    rol = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = 'roles'
+
+
 

@@ -8,7 +8,7 @@ urlpatterns = [
     path('api/',include('api.urls')),
 
     #urls para generar, refrescar y verificar tokens 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_generate'), 
-    path('api/token/refresh/',TokenRefreshView.as_view(), name='token_refresh'),
-    path('/apitoken/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_generate'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]

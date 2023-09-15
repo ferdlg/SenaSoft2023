@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+from django.db import models
 class Ciudades(models.Model):
     id_ciudad = models.IntegerField(primary_key=True)
     id_departamento_fk = models.ForeignKey('Departamentos', models.DO_NOTHING, db_column='id_departamento_fk')
@@ -49,4 +50,11 @@ class TipoDocumento(models.Model):
     class Meta:
         
         db_table = 'tipo_documento'
+
+class Roles(models.Model):
+    id_rol = models.AutoField(primary_key=True)
+    rol = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = 'roles'
 
