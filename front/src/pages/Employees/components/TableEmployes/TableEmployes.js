@@ -22,9 +22,9 @@ const TableEmployes = ({ employes }) => {
   const filteredEmployes = employes.filter((employe) => {
     const Nombres = employe.nombres_empleado ? employe.nombres_empleado.toLowerCase() : '';
     const Apellidos = employe.apellidos_empleado ? employe.apellidos_empleado.toLowerCase() : '';
-    const TipoDoc = employe.tipo_documento.nombre_tipo_documento ? employe.tipo_documento.nombre_tipo_documento.toLowerCase() : '';
+    const TipoDoc = employe.tipo_documento?.nombre_tipo_documento ? employe.tipo_documento.nombre_tipo_documento.toLowerCase() : '';
     const NumDoc = employe.numero_documento ? employe.numero_documento.toString().toLowerCase() : '';
-    const Departamento = employe.departamento.nombre_departamento ? employe.departamento.nombre_departamento.toLowerCase() : '';
+    const Departamento = employe.departamento?.nombre_departamento ? employe.departamento.nombre_departamento.toLowerCase() : '';
     
     const filter_Nombres = searchFilters.Nombres.toLowerCase();
     const filter_Apellidos = searchFilters.Apellidos.toLowerCase();
@@ -59,14 +59,16 @@ const TableEmployes = ({ employes }) => {
   const columns = [
     { id: 'nombres_empleado', label: 'Nombres', minWidth: 100, align: 'center' },
     { id: 'apellidos_empleado', label: 'Apellidos', minWidth: 170, align: 'center' },
-    { id: 'tipo_documento.nombre_tipo_documento', label: 'Tipo Documento', minWidth: 170, align: 'center' },
+    { id: 'tipo_documento', label: 'Tipo Documento', minWidth: 170, align: 'center' },
     { id: 'numero_documento', label: 'Número Documento', minWidth: 170, align: 'center' },
-    { id: 'departamento.nombre_departamento', label: 'Departamento', minWidth: 170, align: 'center' },
+    { id: 'departamento', label: 'Departamento', minWidth: 170, align: 'center' },
     { id: 'Acciones', label: 'Acciones', minWidth: 100, align: 'center' },
   ];
 
   const rows = filteredEmployes.map((employee) => ({
     ...employee,
+    tipo_documento: employee.tipo_documento?.nombre_tipo_documento,
+    departamento: employee.departamento?.nombre_departamento,
     Acciones: (
       <div className='OpcionesTable'>
         <Button color='secondary' onClick={() => handleEditEmployee(employee.id_empleado)}>
