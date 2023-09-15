@@ -68,35 +68,51 @@ class EmpleadosView(View):
         return JsonResponse(datos)
 
     def put (self, request, id):
-        json_data = json.loads(request.body)
-        empleados = list(Empleados.objects.filter(id=id).values())
-        
-        if len (empleados)>0:
-            empleado = Empleados.objects.get(id = id)
-            # Actualiza las relaciones con tablas relacionadas, datos foraneos
-            id_tipo_documento = json_data['id_tipo_documento_fk']
-            tipo_documento = TipoDocumento.objects.get(id_tipo_documento=id_tipo_documento)
-            id_departamento = json_data['id_departamento_fk']
-            departamento = Departamentos.objects.get(id_departamento=id_departamento)
-            id_ciudad = json_data['id_ciudad_fk']
-            ciudad = Ciudades.objects.get(id_ciudad=id_ciudad)
+            try:
+                    empleado = Empleados.objects.get(id_empleado=id)
+                    json_data = json.loads(request.body)
 
-            empleado.tipo_documento_fk = tipo_documento
-            empleado.id_departamento_fk = departamento
-            empleado.id_ciudad_fk = ciudad  
-            
-            # Actualizar datos no foraneos 
-            empleado.numero_documento = json_data['numero_documento']
-            empleado.nombres_empleado = json_data['nombres_empleado']
-            empleado.apellidos_empleado = json_data['apellidos_empleado']
-            empleado.direccion = json_data['direccion']
-            empleado.email = json_data['email']
-            empleado.telefono = json_data['telefono']
-            empleado.save()
-            datos = {'message':"Succes"}
-        else: 
-            datos = {'message':"Empleado no encontrado..."}
-        return JsonResponse(datos)
+                    # Actualizar campos relacionados si están presentes en JSON
+                    if 'id_tipo_documento_fk' in json_data:
+                        id_tipo_documento = json_data['id_tipo_documento_fk']
+                        tipo_documento = TipoDocumento.objects.get(id_tipo_documento=id_tipo_documento)
+                        empleado.tipo_documento_fk = tipo_documento
+
+                    if 'id_departamento_fk' in json_data:
+                        id_departamento = json_data['id_departamento_fk']
+                        departamento = Departamentos.objects.get(id_departamento=id_departamento)
+                        empleado.id_departamento_fk = departamento
+
+                    if 'id_ciudad_fk' in json_data:
+                        id_ciudad = json_data['id_ciudad_fk']
+                        ciudad = Ciudades.objects.get(id_ciudad=id_ciudad)
+                        empleado.id_ciudad_fk = ciudad
+
+                    # Actualizar campos no relacionados si están presentes en JSON
+                    if 'numero_documento' in json_data:
+                        empleado.numero_documento = json_data['numero_documento']
+
+                    if 'nombres_empleado' in json_data:
+                        empleado.nombres_empleado = json_data['nombres_empleado']
+
+                    if 'apellidos_empleado' in json_data:
+                        empleado.apellidos_empleado = json_data['apellidos_empleado']
+
+                    if 'direccion' in json_data:
+                        empleado.direccion = json_data['direccion']
+
+                    if 'email' in json_data:
+                        empleado.email = json_data['email']
+
+                    if 'telefono' in json_data:
+                        empleado.telefono = json_data['telefono']
+
+                    empleado.save()
+                    datos = {'message': "Empleado actualizado con exito"}
+            except Empleados.DoesNotExist:
+                    datos = {'message': "Empleado no encontrado..."}
+    
+            return JsonResponse(datos)
 
     def delete (self, request, id):
         json_data = json.loads(request.body)
