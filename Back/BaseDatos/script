@@ -67,3 +67,7 @@ VALUES
     (4, '98765', 'Elena', 'Rodríguez', 4, 4, 'Diagonal 303', 'elena.rodriguez@example.com', '321654987', '2023-09-04', '2023-09-04'),
     (1, '24680', 'José', 'Sánchez', 5, 2, 'Calle 896', 'jose.sanchez@example.com', '789123456', '2023-09-04', '2023-09-04'),
     (2, '13579', 'Mónica', 'Martínez', 1, 1, 'Avenida 456', 'monica.martinez@example.com', '987654321', '2023-09-04', '2023-09-04');
+
+INSERT INTO roles(rol) 
+values ('admin'),
+	('empleados');
