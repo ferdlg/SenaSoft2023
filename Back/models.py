@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove ` ` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
@@ -12,7 +12,7 @@ class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_group'
 
 
@@ -22,7 +22,7 @@ class AuthGroupPermissions(models.Model):
     permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_group_permissions'
         unique_together = (('group', 'permission'),)
 
@@ -33,7 +33,7 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_permission'
         unique_together = (('content_type', 'codename'),)
 
@@ -51,7 +51,7 @@ class AuthUser(models.Model):
     date_joined = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_user'
 
 
@@ -61,7 +61,7 @@ class AuthUserGroups(models.Model):
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_user_groups'
         unique_together = (('user', 'group'),)
 
@@ -72,9 +72,19 @@ class AuthUserUserPermissions(models.Model):
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+         
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
+
+
+class AuthtokenToken(models.Model):
+    key = models.CharField(primary_key=True, max_length=40)
+    created = models.DateTimeField()
+    user = models.OneToOneField(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+         
+        db_table = 'authtoken_token'
 
 
 class Ciudades(models.Model):
@@ -83,7 +93,7 @@ class Ciudades(models.Model):
     nombre_ciudad = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
+         
         db_table = 'ciudades'
 
 
@@ -95,7 +105,7 @@ class Departamentos(models.Model):
     fecha_hora_modificar = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'departamentos'
 
 
@@ -109,7 +119,7 @@ class DjangoAdminLog(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+         
         db_table = 'django_admin_log'
 
 
@@ -118,7 +128,7 @@ class DjangoContentType(models.Model):
     model = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+         
         db_table = 'django_content_type'
         unique_together = (('app_label', 'model'),)
 
@@ -130,7 +140,7 @@ class DjangoMigrations(models.Model):
     applied = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'django_migrations'
 
 
@@ -140,7 +150,7 @@ class DjangoSession(models.Model):
     expire_date = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'django_session'
 
 
@@ -159,7 +169,7 @@ class Empleados(models.Model):
     fecha_hora_modificar = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'empleados'
 
 
@@ -168,5 +178,5 @@ class TipoDocumento(models.Model):
     nombre_tipo_documento = models.CharField(max_length=10)
 
     class Meta:
-        managed = False
+         
         db_table = 'tipo_documento'

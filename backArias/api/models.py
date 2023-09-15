@@ -7,7 +7,7 @@ class Ciudades(models.Model):
     nombre_ciudad = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
-        managed = False
+         
         db_table = 'ciudades'
 
 
@@ -19,7 +19,7 @@ class Departamentos(models.Model):
     fecha_hora_modificar = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'departamentos'
 
 
@@ -38,7 +38,7 @@ class Empleados(models.Model):
     fecha_hora_modificar = models.DateTimeField()
 
     class Meta:
-        managed = False
+         
         db_table = 'empleados'
 
 
@@ -47,7 +47,7 @@ class Roles(models.Model):
     nombre_rol = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
-        managed = False
+         
         db_table = 'roles'
 
 
@@ -56,5 +56,5 @@ class TipoDocumento(models.Model):
     nombre_tipo_documento = models.CharField(max_length=10)
 
     class Meta:
-        managed = False
+         
         db_table = 'tipo_documento'
