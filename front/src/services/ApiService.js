@@ -18,18 +18,10 @@ const ApiService = {
 
   getDepartments: async () => {
     try {
-      const response = await axios.get('departamentos/');
-      const data = response.data.departamentos;
-      
-      // Verifica que data sea un array antes de usar map
-      if (Array.isArray(data)) {
-        const departamentosConId = data.map((dep) => ({ id: dep.id, Departamento: dep.Departamento }));
-        
-        return departamentosConId;
-      } else {
-        console.error("El servidor no devolvió un array de departamentos:", data);
-        throw new Error("Respuesta del servidor no válida");
-      }
+      const urlDepartamentos = url+'departamentos/';
+      const response = await axios.get(urlDepartamentos);
+      const data = response.data;
+      return data.departamentos;
     } catch (error) {
       console.error("Error al cargar departamentos:", error);
       throw error;
@@ -38,9 +30,10 @@ const ApiService = {
 
   getCitiesByDepartmentId: async (departmentId) => {
     try {
-      const response = await axios.get(`https://api-colombia.com/api/v1/Department/${departmentId}/cities`);
+      const urlCiudades = url+'filtro/'+departmentId+'/';
+      const response = await axios.get(urlCiudades);
       const data = response.data;
-      return data;
+      return data.ciudades;
     } catch (error) {
       console.error("Error al cargar ciudades:", error);
       throw error;

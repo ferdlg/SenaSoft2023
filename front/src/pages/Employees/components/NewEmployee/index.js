@@ -154,7 +154,7 @@ const NewEmployee = () => {
                     >
                         {departamentos.map((option, index) => (
                             <MenuItem key={index} value={option.id}>
-                                {option.name}
+                                {option.Departamento}
                             </MenuItem>
                         ))}
                     </Select>
@@ -172,8 +172,8 @@ const NewEmployee = () => {
                         size='small'
                     >
                         {ciudades.map((option, index) => (
-                            <MenuItem key={index} value={option.id}>
-                                {option.name}
+                            <MenuItem key={index} value={option.id_ciudad}>
+                                {option.nombre_ciudad}
                             </MenuItem>
                         ))}
                     </Select>
