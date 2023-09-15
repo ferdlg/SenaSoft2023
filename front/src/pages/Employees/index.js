@@ -6,6 +6,9 @@ import TableEmployes from "./components/TableEmployes/TableEmployes";
 import Title from "../../components/Title";
 import MyModal from "../../components/MyModal";
 import NewEmployee from "./components/NewEmployee";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "@fortawesome/fontawesome-free"
 import "./Employees.css"
 
 const Employees = () => {
