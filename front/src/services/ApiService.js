@@ -11,7 +11,19 @@ const ApiService = {
       const data = response.data;
       return data.empleados;
     } catch (error) {
-      console.error("Error al cargar empleados: "+ error)
+      console.error("API: Error al cargar empleados: "+ error)
+      throw error;
+    }
+  },
+
+  getTipoDoc: async () => {
+    try {
+      const urlTipoDoc = url+'Tipo_documento/';
+      const response = await axios.get(urlTipoDoc);
+      const data = response.data;
+      return data['Tipo de documentos'];
+    } catch (error) {
+      console.error("API: Error al cargar empleados: "+ error)
       throw error;
     }
   },
@@ -23,7 +35,7 @@ const ApiService = {
       const data = response.data;
       return data.departamentos;
     } catch (error) {
-      console.error("Error al cargar departamentos:", error);
+      console.error("API: Error al cargar departamentos:", error);
       throw error;
     }
   },
@@ -35,7 +47,7 @@ const ApiService = {
       const data = response.data;
       return data.ciudades;
     } catch (error) {
-      console.error("Error al cargar ciudades:", error);
+      console.error("API: Error al cargar ciudades:", error);
       throw error;
     }
   },
